@@ -15,7 +15,7 @@ namespace RegexSample
             string pattern1 = @"\b100\.\d{2}|10{3}|(1 0{3} 0{3})|1\b";
             string pattern2 = @"(?<=api\?)\S+?(?=&)|(?<=&)\S+?(?=&)|(?<=&)\S+";
             string pattern3 = @"[ ]+";
-            string pattern4 = @"";
+            string pattern4 = @"\+?\d{3} \d{8}|0 \(\d{3}\) \d{5}|\d{8}";
 
             Console.WriteLine(input1);
             MatchCollection matchCollection = Regex.Matches(input1, pattern1);
@@ -34,6 +34,17 @@ namespace RegexSample
             string replacement = " ";
             Console.WriteLine(Regex.Replace(input3,pattern3,replacement));
 
+            foreach (var value in values)
+            {
+                if (Regex.IsMatch(value,pattern4))
+                {
+                    Console.WriteLine($"{value} is correct phone number");
+                }
+                else
+                {
+                    Console.WriteLine($"{value} is not correct phone number");
+                }
+            }
         }
     }
 }
